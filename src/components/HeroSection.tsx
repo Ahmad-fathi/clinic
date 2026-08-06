@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { HeaderNavbar } from './HeaderNavbar';
-const heroBgImage = '../assets/images/cosmoderm_hero_bg_1785937809389.jpg';
+const heroBgImage = '../assets/images/1.png';
 
 interface HeroSectionProps {
   activeNav?: string;
