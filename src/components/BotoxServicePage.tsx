@@ -17,9 +17,9 @@ import { HeaderNavbar } from './HeaderNavbar';
 import { CosmodermLogo } from './CosmodermLogo';
 import { FooterSection } from './FooterSection';
 
-import heroBotoxImg from '../assets/images/pexels-hannah-barata-776560167-27925593.jpg';
-import fullFaceImg from '../assets/images/pexels-sum-sum-2159674381-38796266.jpg';
-import doctorCareImg from '../assets/images/pexels-cottonbro-7581590.jpg';
+import heroBotoxImg from '../assets/images/optimized/pexels-hannah-barata-776560167-27925593.webp';
+import fullFaceImg from '../assets/images/optimized/pexels-sum-sum-2159674381-38796266.webp';
+import doctorCareImg from '../assets/images/optimized/pexels-cottonbro-7581590.webp';
 
 interface BotoxServicePageProps {
   onBackToHome: () => void;
@@ -157,7 +157,9 @@ export const BotoxServicePage: React.FC<BotoxServicePageProps> = ({ onBackToHome
           <HeaderNavbar 
             activeNav="treatments" 
             setActiveNav={(nav) => {
-              if (nav === 'home') {
+              if (nav === 'about') {
+                setActiveNav(nav);
+              } else if (nav === 'home') {
                 onBackToHome();
               } else {
                 setActiveNav(nav);
@@ -471,7 +473,7 @@ export const BotoxServicePage: React.FC<BotoxServicePageProps> = ({ onBackToHome
       {/* Luxury Footer Section */}
       <FooterSection 
         onNavigate={onBackToHome} 
-        onOpenConsultation={() => window.location.href = 'tel:+966126000000'} 
+        onOpenConsultation={() => window.location.href = 'tel:+966****0000'} 
       />
 
     </div>

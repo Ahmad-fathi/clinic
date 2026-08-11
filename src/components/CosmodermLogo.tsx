@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useId } from 'react';
 
 interface LogoProps {
   className?: string;
@@ -13,6 +13,12 @@ export const CosmodermLogo: React.FC<LogoProps> = ({
 }) => {
   const isSm = size === 'sm';
   const isLg = size === 'lg';
+
+  // Every logo instance needs its own gradient id. With a shared hard-coded id,
+  // all instances resolve url(#id) to the FIRST match in the document — which is
+  // the hidden desktop logo (0x0) on mobile, so the gold "S" stroke painted
+  // nothing and appeared to be missing.
+  const gradientId = `logoGoldGradient-${useId().replace(/:/g, '')}`;
 
   const isLight = variant === 'light';
 
@@ -49,12 +55,12 @@ export const CosmodermLogo: React.FC<LogoProps> = ({
           >
             <path
               d="M 16 3 C 16 3, 3 13, 5 25 C 7 37, 18 41, 2 47"
-              stroke="url(#logoGoldGradientRef)"
+              stroke={`url(#${gradientId})`}
               strokeWidth="3.5"
               strokeLinecap="round"
             />
             <defs>
-              <linearGradient id="logoGoldGradientRef" x1="0%" y1="0%" x2="100%" y2="100%">
+              <linearGradient id={gradientId} x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stopColor="#f8ebb8" />
                 <stop offset="50%" stopColor="#d4af37" />
                 <stop offset="100%" stopColor="#8c6a0f" />

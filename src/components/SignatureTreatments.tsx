@@ -1,33 +1,35 @@
 import React, { useEffect, useRef } from 'react';
 
-import botoxImg from '/src/assets/images/pexels-cottonbro-7581580.jpg';
-import xerfImg from '/src/assets/images/pexels-shvetsa-4586745.jpg';
-import rhinoplastyImg from '/src/assets/images/Gemini_Generated_Image_4kjrv74kjrv74kjr.png';
-import stemcellImg from '/src/assets/images/pexels-o3-studiio-900294148-21391399.jpg';
-import hairTransplantImg from '/src/assets/images/pexels-isabella-mendes-107313-21810006.jpg';
-import ivDripsImg from '/src/assets/images/pexels-shvetsa-3845115.jpg';
-import endoliftImg from '/src/assets/images/treatment_endolift_1785944912634.jpg';
-import laserHairImg from '/src/assets/images/pexels-orhunruzgaroz-10822254.jpg';
+import botoxImg from '../assets/images/optimized/pexels-cottonbro-7581580.webp';
+import xerfImg from '../assets/images/optimized/pexels-shvetsa-4586745.webp';
+import rhinoplastyImg from '../assets/images/optimized/Gemini_Generated_Image_4kjrv74kjrv74kjr.webp';
+import stemcellImg from '../assets/images/optimized/pexels-o3-studiio-900294148-21391399.webp';
+import hairTransplantImg from '../assets/images/optimized/pexels-isabella-mendes-107313-21810006.webp';
+import ivDripsImg from '../assets/images/optimized/pexels-shvetsa-3845115.webp';
+import endoliftImg from '../assets/images/optimized/treatment_endolift_1785944912634.webp';
+import laserHairImg from '../assets/images/optimized/pexels-orhunruzgaroz-10822254.webp';
 
 interface TreatmentItem {
   id: string;
   title: string;
   image: string;
+  category: string;
 }
 
 const treatments: TreatmentItem[] = [
-  { id: 'botox',        title: 'BOTOX',              image: botoxImg },
-  { id: 'xerf',         title: 'XERF',               image: xerfImg },
-  { id: 'rhinoplasty',  title: 'RHINOPLASTY',        image: rhinoplastyImg },
-  { id: 'stemcell',     title: 'STEM CELL',          image: stemcellImg },
-  { id: 'hairtransplant', title: 'HAIR TRANSPLANT',  image: hairTransplantImg },
-  { id: 'ivdrips',      title: 'IV DRIPS',           image: ivDripsImg },
-  { id: 'endolift',     title: 'ENDOLIFT',           image: endoliftImg },
-  { id: 'laserhair',    title: 'LASER HAIR REMOVAL', image: laserHairImg },
+  { id: 'botox',        title: 'BOTOX',              image: botoxImg,        category: 'Injectables & Fillers' },
+  { id: 'xerf',         title: 'XERF',               image: xerfImg,         category: 'Laser' },
+  { id: 'rhinoplasty',  title: 'RHINOPLASTY',        image: rhinoplastyImg,  category: 'Skin Treatments' },
+  { id: 'stemcell',     title: 'STEM CELL',          image: stemcellImg,     category: 'Skin Treatments' },
+  { id: 'hairtransplant', title: 'HAIR TRANSPLANT',  image: hairTransplantImg, category: 'Hair Restoration' },
+  { id: 'ivdrips',      title: 'IV DRIPS',           image: ivDripsImg,      category: 'Body Treatments' },
+  { id: 'endolift',     title: 'ENDOLIFT',           image: endoliftImg,     category: 'Laser' },
+  { id: 'laserhair',    title: 'LASER HAIR REMOVAL', image: laserHairImg,    category: 'Laser' },
 ];
 
 interface SignatureTreatmentsProps {
   onSelectTreatment?: (id: string) => void;
+  activeFilter?: string;
 }
 
 /** Attach IntersectionObserver; adds "in-view" class once element enters viewport. */
@@ -53,54 +55,32 @@ function useReveal(els: React.RefObject<HTMLElement | null>[]) {
   }, []);
 }
 
-export const SignatureTreatments: React.FC<SignatureTreatmentsProps> = ({ onSelectTreatment }) => {
+export const SignatureTreatments: React.FC<SignatureTreatmentsProps> = ({ onSelectTreatment, activeFilter }) => {
   const headingRef = useRef<HTMLHeadingElement>(null);
-  const cardRefs   = useRef<(HTMLDivElement | null)[]>([]);
 
   // Reveal heading
   useReveal([headingRef as React.RefObject<HTMLElement>]);
 
-  // Reveal each card individually
-  useEffect(() => {
-    const observers = cardRefs.current.map((card) => {
-      if (!card) return null;
-      const obs = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            card.classList.add('in-view');
-            obs.unobserve(card);
-          }
-        },
-        { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
-      );
-      obs.observe(card);
-      return obs;
-    });
-    return () => observers.forEach((o) => o?.disconnect());
-  }, []);
-
   return (
-    <section className="w-full bg-gradient-to-b from-[#eee9df] via-[#e2ddd2] to-[#e8e3d8] text-[#24342c] py-10 sm:py-14 px-2 sm:px-4 border-t border-[#d8d2c4] font-avenir">
+    <section className="w-full bg-gradient-to-b from-[#eee9df] via-[#e2ddd2] to-[#e8e3d8] text-[#24342c] pt-10 sm:pt-14 pb-10 sm:pb-14 px-2 sm:px-4 border-t border-[#d8d2c4] font-avenir">
       <div className="max-w-[1400px] mx-auto">
 
         <h2
           ref={headingRef}
-          className="reveal text-3xl sm:text-4xl md:text-5xl font-extralight text-[#24342c] text-center font-avenir tracking-wide mb-10 sm:mb-12"
+          className="reveal text-3xl sm:text-4xl md:text-5xl font-extralight text-[#24342c] text-center font-avenir tracking-wide mb-6 sm:mb-10"
         >
           Signature Treatments
         </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-1.5 sm:gap-2">
-          {treatments.map((treatment, index) => {
-            // Stagger each card: col position drives the extra delay class
-            const delayClass = ['', 'reveal-d1', 'reveal-d2', 'reveal-d3'][index % 4];
-
+          {treatments
+            .filter((treatment) => !activeFilter || activeFilter === 'All' || treatment.category === activeFilter)
+            .map((treatment) => {
             return (
               <div
                 key={treatment.id}
-                ref={(el) => { cardRefs.current[index] = el; }}
                 onClick={() => onSelectTreatment?.(treatment.id)}
-                className={`reveal ${delayClass} group relative w-full aspect-[4/5] overflow-hidden bg-stone-900 cursor-pointer select-none rounded-[6px] shadow-md`}
+                className="group relative w-full aspect-[1/1] sm:aspect-[4/5] overflow-hidden bg-stone-900 cursor-pointer select-none rounded-[6px] shadow-md"
               >
                 <img
                   src={treatment.image}

@@ -8,12 +8,18 @@ import Lenis from 'lenis';
 import { HeroSection } from './components/HeroSection';
 import { SignatureTreatments } from './components/SignatureTreatments';
 import { MeetSpecialists } from './components/MeetSpecialists';
+import { BlogSection } from './components/BlogSection';
 import { BotoxServicePage } from './components/BotoxServicePage';
 import { XerfServicePage } from './components/XerfServicePage';
 import { FooterSection } from './components/FooterSection';
+import { AboutPage } from './components/AboutPage';
+import { OurTeamPage } from './components/OurTeamPage';
+import { TreatmentsPage } from './components/TreatmentsPage';
+import { HealthConditionsPage } from './components/HealthConditionsPage';
 
 export default function App() {
-  const [currentView, setCurrentView] = useState<'home' | 'botox' | 'xerf'>('home');
+  const [currentView, setCurrentView] = useState<'home' | 'botox' | 'xerf' | 'about' | 'team' | 'team-detail' | 'treatments' | 'health-condition'>('home');
+  const [memberSlug, setMemberSlug] = useState<string | null>(null);
   const [activeNav, setActiveNav] = useState('home');
   const lenisRef = useRef<Lenis | null>(null);
 
@@ -54,6 +60,20 @@ export default function App() {
     }
   };
 
+  const handleNavSelect = (nav: string) => {
+    if (nav === 'about' || nav === 'team' || nav === 'treatments' || nav === 'health-condition') {
+      if (lenisRef.current) {
+        lenisRef.current.scrollTo(0, { immediate: true });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+      setCurrentView(nav as 'about' | 'team' | 'treatments' | 'health-condition');
+      setActiveNav(nav);
+    } else {
+      handleBackToHome();
+    }
+  };
+
   const handleBackToHome = () => {
     if (lenisRef.current) {
       lenisRef.current.scrollTo(0, { immediate: true });
@@ -64,6 +84,44 @@ export default function App() {
     setCurrentView('home');
     setActiveNav('home');
   };
+
+  if (currentView === 'about') {
+    return <AboutPage setActiveNav={handleNavSelect} />;
+  }
+
+  if (currentView === 'treatments') {
+    return <TreatmentsPage setActiveNav={handleNavSelect} />;
+  }
+
+  if (currentView === 'health-condition') {
+    return <HealthConditionsPage setActiveNav={handleNavSelect} />;
+  }
+
+  if (currentView === 'team') {
+    return (
+      <OurTeamPage
+        setActiveNav={handleNavSelect}
+        onSelectMember={(slug) => {
+          if (lenisRef.current) {
+            lenisRef.current.scrollTo(0, { immediate: true });
+          } else {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }
+          setMemberSlug(slug);
+          setCurrentView('team-detail');
+        }}
+      />
+    );
+  }
+
+  if (currentView === 'team-detail') {
+    return (
+      <OurTeamPage
+        setActiveNav={handleNavSelect}
+        onSelectMember={(slug) => setMemberSlug(slug)}
+      />
+    );
+  }
 
   if (currentView === 'xerf') {
     return (
@@ -85,12 +143,13 @@ export default function App() {
 
   return (
     <div className="w-full min-h-screen bg-gradient-to-b from-[#eee9df] via-[#e2ddd2] to-[#eae5da] text-[#24342c]">
-      <HeroSection activeNav={activeNav} setActiveNav={setActiveNav} />
+      <HeroSection activeNav={activeNav} setActiveNav={handleNavSelect} />
       <SignatureTreatments onSelectTreatment={handleSelectTreatment} />
       <MeetSpecialists />
+      <BlogSection />
       <FooterSection
         onNavigate={handleBackToHome}
-        onOpenConsultation={() => window.location.href = 'tel:+966126000000'}
+        onOpenConsultation={() => window.location.href = 'tel:+966****0000'}
       />
     </div>
   );

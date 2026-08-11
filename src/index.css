@@ -1,9 +1,28 @@
 @import "tailwindcss";
 @import "lenis/dist/lenis.css";
 
+/* ─── Fonts ───────────────────────────────────────────────
+   Inter for body, Playfair Display for elevated headings.
+   Loaded from Google Fonts in index.html.
+────────────────────────────────────────────────────────── */
+.font-body {
+  font-family: 'Inter', 'Avenir Next', 'Avenir', 'Jost', 'Montserrat', system-ui, sans-serif;
+}
+
+.font-serif-display {
+  font-family: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+}
+
 /* ─── Global smooth scrolling ─────────────────────────────── */
 html {
   scroll-behavior: smooth;
+}
+
+/* Never allow horizontal scroll on small screens */
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 /* ─── Single scroll-reveal system ────────────────────────────
@@ -50,6 +69,11 @@ html {
 
 .font-mulish {
   font-family: 'Mulish', sans-serif;
+}
+
+.font-mulish-light {
+  font-family: 'Mulish', sans-serif;
+  font-weight: 300;
 }
 
 .font-display {
