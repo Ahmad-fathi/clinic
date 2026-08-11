@@ -4,7 +4,7 @@ import { FooterSection } from './FooterSection';
 import { Phone, MapPin, Mail } from 'lucide-react';
 import heroInterior from '../assets/images/optimized/pexels-thien-nhan-2155814122-36894415.webp';
 import clinicLounge from '../assets/images/optimized/pexels-cristian-rojas-8459996.webp';
-import docLongevity from '../assets/images/optimized/3.webp';
+import teamGroup from '../assets/images/optimized/team-group-cristian-rojas.webp';
 
 /* Observe every `.reveal` element inside the given container and add
    `in-view` when it enters the viewport. Mirrors the home-page reveal. */
@@ -192,9 +192,9 @@ export const AboutPage: React.FC<{ setActiveNav: (nav: string) => void }> = ({ s
             {/* Right column: team photo, rounded 8px */}
             <div className="overflow-hidden rounded-[8px]">
               <img
-                src={docLongevity}
+                src={teamGroup}
                 alt="The Cosmoderm team"
-                className="aspect-[4/3] w-full object-cover object-top"
+                className="aspect-[4/3] w-full object-cover object-center"
               />
             </div>
 

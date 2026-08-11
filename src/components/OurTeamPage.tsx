@@ -14,7 +14,6 @@ import p8 from '../assets/images/optimized/pexels-gustavo-fring-5888160.webp';
 import p9 from '../assets/images/optimized/pexels-karola-g-6627919.webp';
 import p10 from '../assets/images/optimized/pexels-mikhail-nilov-7407063.webp';
 import p11 from '../assets/images/optimized/pexels-nuptune-7966285.webp';
-import teamGroup from '../assets/images/optimized/team-group-cristian-rojas.webp';
 
 /* Observe every `.reveal` element inside the given container and add
    `in-view` when it enters the viewport. Mirrors the home-page reveal. */
@@ -118,20 +117,6 @@ export const OurTeamPage: React.FC<{ setActiveNav: (nav: string) => void; onSele
       {/* ═══ SECTION 2: TEAM GRID (main content) ═══ */}
       <section className="w-full bg-white">
         <div className="mx-auto max-w-[960px] px-5 sm:px-8">
-        {/* Featured team group photo */}
-        <div className="reveal mt-10 sm:mt-12 md:mt-16">
-          <div className="w-full overflow-hidden rounded-[10px]">
-            <img
-              src={teamGroup}
-              alt="The Cosmoderm Clinics team"
-              className="h-full w-full object-cover"
-            />
-          </div>
-          <p className="font-mulish-light mt-3 text-center text-[13px] font-light leading-[1.4] text-[#8a8f8a] sm:text-[14px]">
-            The Cosmoderm Clinics team
-          </p>
-        </div>
-
         {/* TOP MARGIN: matches About page section rhythm (mt-10) */}
         <div className="mt-10 sm:mt-12 md:mt-16">
           <div className="grid grid-cols-1 gap-7 sm:grid-cols-2 sm:gap-8 lg:grid-cols-3 lg:gap-8">
