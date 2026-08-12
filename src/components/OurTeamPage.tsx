@@ -12,11 +12,9 @@ import p6 from '../assets/images/optimized/pexels-pavel-danilyuk-6812436.webp';
 import p7 from '../assets/images/optimized/pexels-cedric-fauntleroy-4270371.webp';
 import p8 from '../assets/images/optimized/pexels-gustavo-fring-5888160.webp';
 import p9 from '../assets/images/optimized/pexels-karola-g-6627919.webp';
-import p10 from '../assets/images/optimized/pexels-mikhail-nilov-7407063.webp';
-import p11 from '../assets/images/optimized/pexels-nuptune-7966285.webp';
 
-/* Observe every `.reveal` element inside the given container and add
-   `in-view` when it enters the viewport. Mirrors the home-page reveal. */
+
+
 function useRevealContainer(containerRef: React.RefObject<HTMLElement | null>) {
   React.useEffect(() => {
     const root = containerRef.current;
@@ -31,21 +29,6 @@ function useRevealContainer(containerRef: React.RefObject<HTMLElement | null>) {
   }, [containerRef]);
 }
 
-/* ------------------------------------------------------------------
-   OUR TEAM PAGE
-
-   Reuses the exact same global styles / header / hero treatment /
-   fonts / colors / spacing / footer as AboutPage. The page differs
-   only in its main content section: a responsive team-photo grid
-   (3 cols desktop, 2 cols tablet, 1 col mobile) in place of the
-   About page's two-column story/approach + team blocks.
-
-   Card spec:
-     • no border, no shadow, no background box
-     • portrait photo, consistent aspect ratio (3/4), sharp corners
-     • object-cover so all photos crop consistently
-     • name (serif-display) + role (gold label) beneath
-------------------------------------------------------------------- */
 
 const PHONE_HREF = 'tel:+966****0000';
 
@@ -57,11 +40,7 @@ interface TeamMember {
   objPos?: string;
 }
 
-// Photos reuse the site's existing media library (only clean professional
-// portraits are used — verified single-person, non-patient shots).
-// Names/titles 1–3 are reused verbatim from the homepage "Meet Our Specialists"
-// section (same photos) for cross-site consistency. 4–9 use realistic Arabic
-// doctor names (Latin script) with plausible aesthetic-clinic titles.
+
 const TEAM: TeamMember[] = [
   { name: 'Dr. Mohammed Qashmar', role: 'Consultant Dermatologist', img: p1, slug: 'mohammed-qashmar' },
   { name: 'Dr. Mohammed Dahak', role: 'Aesthetic Physician', img: p2, slug: 'mohammed-dahak' },
@@ -71,9 +50,8 @@ const TEAM: TeamMember[] = [
   { name: 'Dr. Omar Farouk', role: 'General Practitioner', img: p6, slug: 'omar-farouk' },
   { name: 'Dr. Tariq Nasser', role: 'Specialist Plastic Surgeon', img: p7, slug: 'tariq-nasser' },
   { name: 'Dr. Salma Aziz', role: 'Physician — General Practice', img: p8, slug: 'salma-aziz' },
-  { name: 'Dr. Rafik Haddad', role: 'Hair Restoration & Aesthetic Physician', img: p9, slug: 'rafik-haddad', objPos: 'center' },
-  { name: 'Dr. Ahmed El-Sayed', role: 'Dermatologist', img: p10, slug: 'ahmed-el-sayed' },
-  { name: 'Dr. Yasmine Fathy', role: 'Aesthetic Physician', img: p11, slug: 'yasmine-fathy' },
+  { name: 'Dr. Rafik Haddad', role: 'Hair Restoration & Aesthetic Physician', img: p9, slug: 'rafik-haddad', objPos: 'center' }
+
 ];
 
 export const OurTeamPage: React.FC<{ setActiveNav: (nav: string) => void; onSelectMember?: (slug: string) => void }> = ({ setActiveNav, onSelectMember }) => {
